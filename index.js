@@ -7,7 +7,7 @@
         mouseSize: 120,
         bigDotRadius: 35,
         smooth:  0.95,
-        sphereRadius: 300
+        sphereRadius: 600
     }
     const TWO_PI = 2 * Math.PI;
     const canvas = document.querySelector('canvas');
@@ -111,6 +111,15 @@
     init();
     loop();
     canvas.addEventListener(`mousemove`, setPosition);
-    window,addEventListener('mousedown', isDown);
-    window,addEventListener('mouseup', isDown);
+    window.addEventListener('mousedown', isDown);
+    window.addEventListener('mouseup', isDown);
+    function isMobileDevice() {
+        return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+    };
+    if(isMobileDevice){
+        canvas.addEventListener(`touchmove`, setPosition);
+        window.addEventListener('touchend', isDown);
+        window.addEventListener('touchstart', isDown);
+    }
+
 })()
